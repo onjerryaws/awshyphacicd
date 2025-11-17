@@ -1,8 +1,14 @@
 #!/bin/bash
-echo 'run after_install.sh: ' >> /home/ec2-user/nodejs-aws-codedeploy-pipeline/deploy.log
 
-echo 'cd /home/ec2-user/nodejs-server-cicd' >> /home/ec2-user/nodejs-aws-codedeploy-pipeline/deploy.log
-cd /home/ec2-user/nodejs-aws-codedeploy-pipeline >> /home/ec2-user/nodejs-aws-codedeploy-pipeline/deploy.log
+# Source nvm so we can use npm
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
 
-echo 'npm install' >> /home/ec2-user/nodejs-aws-codedeploy-pipeline/deploy.log 
-npm install >> /home/ec2-user/nodejs-aws-codedeploy-pipeline/deploy.log
+# Navigate to the application source directory
+cd /home/ec2-user/nodejs-aws-codedeploy-pipeline
+
+# Install application dependencies
+npm install
+
+# Install pm2, a process manager for Node.js, globally
+npm install pm2 -g
